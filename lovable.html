@@ -1,0 +1,243 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Financial Dashboard Prototype</title>
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+    }
+    h2 {
+      margin-top: 0;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 20px 0;
+      border-bottom: 2px solid #ddd;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0;
+      font-weight: 700;
+      color: #2c3e50;
+    }
+    .alert-banner {
+      background: #e74c3c;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    /* Grid layout for dashboard */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    /* Card style */
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Expense Categorization */
+    .expense-categories ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0 0;
+    }
+    .expense-categories li {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 0.95rem;
+    }
+    .expense-categories li:last-child {
+      border-bottom: none;
+    }
+    .category-name {
+      font-weight: 600;
+      color: #2980b9;
+    }
+    .category-amount {
+      font-weight: 700;
+      color: #27ae60;
+    }
+
+    /* Spending Analysis */
+    .spending-analysis {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      height: 120px;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .bar {
+      flex: 1;
+      background: #3498db;
+      border-radius: 5px 5px 0 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: background 0.3s ease;
+      cursor: default;
+    }
+    .bar:hover {
+      background: #2980b9;
+    }
+    .bar-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6px;
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    /* Goal Tracking */
+    .goal {
+      margin-bottom: 15px;
+    }
+    .goal-title {
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #34495e;
+    }
+    .progress-bar-bg {
+      background: #ddd;
+      border-radius: 8px;
+      height: 14px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 8px 0 0 8px;
+      background: linear-gradient(90deg, #27ae60, #2ecc71);
+      width: 0;
+      transition: width 1s ease-in-out;
+    }
+    .goal-meta {
+      margin-top: 5px;
+      font-size: 0.85rem;
+      color: #666;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>AI Financial Dashboard</h1>
+      <div class="alert-banner" role="alert">
+        Alert: You have reached 90% of your monthly budget!
+      </div>
+    </header>
+
+    <div class="dashboard-grid">
+      <!-- Expense Categorization -->
+      <section class="card expense-categories" aria-labelledby="expense-categories-title">
+        <h2 id="expense-categories-title">Automated Expense Categorization</h2>
+        <ul>
+          <li><span class="category-name">Groceries</span> <span class="category-amount">$420.50</span></li>
+          <li><span class="category-name">Transportation</span> <span class="category-amount">$125.00</span></li>
+          <li><span class="category-name">Dining Out</span> <span class="category-amount">$89.75</span></li>
+          <li><span class="category-name">Utilities</span> <span class="category-amount">$150.20</span></li>
+          <li><span class="category-name">Entertainment</span> <span class="category-amount">$65.00</span></li>
+        </ul>
+      </section>
+
+      <!-- Predictive Spending Analysis -->
+      <section class="card spending-analysis" aria-labelledby="spending-analysis-title">
+        <h2 id="spending-analysis-title">Predictive Spending Analysis (Next 6 Months)</h2>
+        <div class="bar-chart" aria-label="Spending prediction bar chart">
+          <div class="bar" style="height: 80%;" title="$800 - April">Apr</div>
+          <div class="bar" style="height: 70%;" title="$700 - May">May</div>
+          <div class="bar" style="height: 90%;" title="$900 - June">Jun</div>
+          <div class="bar" style="height: 85%;" title="$850 - July">Jul</div>
+          <div class="bar" style="height: 75%;" title="$750 - Aug">Aug</div>
+          <div class="bar" style="height: 95%;" title="$950 - Sept">Sep</div>
+        </div>
+        <div class="bar-labels">
+          <span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span>
+        </div>
+      </section>
+
+      <!-- Goal Tracking -->
+      <section class="card goal-tracking" aria-labelledby="goal-tracking-title">
+        <h2 id="goal-tracking-title">Goal Tracking</h2>
+        <div class="goal" aria-label="Goal: Emergency Fund">
+          <div class="goal-title">Emergency Fund</div>
+          <div class="progress-bar-bg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="60">
+            <div class="progress-bar-fill" style="width: 60%;"></div>
+          </div>
+          <div class="goal-meta">
+            <span>Saved: $3,000</span><span>Target: $5,000</span>
+          </div>
+        </div>
+        <div class="goal" aria-label="Goal: Vacation Savings">
+          <div class="goal-title">Vacation Savings</div>
+          <div class="progress-bar-bg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="35">
+            <div class="progress-bar-fill" style="width: 35%;"></div>
+          </div>
+          <div class="goal-meta">
+            <span>Saved: $700</span><span>Target: $2,000</span>
+          </div>
+        </div>
+        <div class="goal" aria-label="Goal: New Laptop">
+          <div class="goal-title">New Laptop</div>
+          <div class="progress-bar-bg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80">
+            <div class="progress-bar-fill" style="width: 80%;"></div>
+          </div>
+          <div class="goal-meta">
+            <span>Saved: $1,200</span><span>Target: $1,500</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
